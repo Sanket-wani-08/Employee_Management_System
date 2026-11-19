@@ -47,65 +47,65 @@ class Command(BaseCommand):
             {
                 'username': 'admin',
                 'email': 'admin@workforce.com',
-                'first_name': 'Admin',
-                'last_name': 'System',
+                'first_name': 'Rajesh',
+                'last_name': 'Sharma',
                 'role': User.ROLE_ADMIN,
                 'is_staff': True,
                 'is_superuser': True,
-                'password': 'admin123',
+                'password': '123456',
                 'emp_id': 'EMP001',
                 'dept': 'Executive & Management',
                 'designation': 'Chief Technology Officer',
                 'salary': 150000.00,
-                'phone': '+1-555-0101',
+                'phone': '+91-98200-11001',
                 'joining': date(2023, 1, 15),
             },
             {
-                'username': 'hr_sarah',
-                'email': 'sarah.hr@workforce.com',
-                'first_name': 'Sarah',
-                'last_name': 'Connor',
+                'username': 'hr_neha',
+                'email': 'neha.hr@workforce.com',
+                'first_name': 'Neha',
+                'last_name': 'Sharma',
                 'role': User.ROLE_HR,
                 'is_staff': True,
                 'is_superuser': False,
-                'password': 'password123',
+                'password': '123456',
                 'emp_id': 'EMP002',
                 'dept': 'Human Resources',
                 'designation': 'HR Operations Lead',
                 'salary': 85000.00,
-                'phone': '+1-555-0102',
+                'phone': '+91-98200-11002',
                 'joining': date(2023, 6, 1),
             },
             {
-                'username': 'pm_alex',
-                'email': 'alex.pm@workforce.com',
-                'first_name': 'Alex',
-                'last_name': 'Morgan',
+                'username': 'pm_mahajan',
+                'email': 'pratham.pm@workforce.com',
+                'first_name': 'Pratham',
+                'last_name': 'Mahajan',
                 'role': User.ROLE_PROJECT_MANAGER,
                 'is_staff': True,
                 'is_superuser': False,
-                'password': 'password123',
+                'password': '123456',
                 'emp_id': 'EMP003',
                 'dept': 'Product & Engineering',
                 'designation': 'Senior Project Manager',
                 'salary': 95000.00,
-                'phone': '+1-555-0103',
+                'phone': '+91-98200-11003',
                 'joining': date(2023, 9, 10),
             },
             {
-                'username': 'dev_john',
-                'email': 'john.dev@workforce.com',
-                'first_name': 'John',
-                'last_name': 'Doe',
+                'username': 'sanket_wani',
+                'email': 'sanket.dev@workforce.com',
+                'first_name': 'Sanket',
+                'last_name': 'Wani',
                 'role': User.ROLE_EMPLOYEE,
                 'is_staff': False,
                 'is_superuser': False,
-                'password': 'password123',
+                'password': '123456',
                 'emp_id': 'EMP004',
                 'dept': 'Product & Engineering',
                 'designation': 'Full Stack Python Developer',
                 'salary': 78000.00,
-                'phone': '+1-555-0104',
+                'phone': '+91-98200-11004',
                 'joining': date(2024, 2, 1),
             },
             {
@@ -116,12 +116,12 @@ class Command(BaseCommand):
                 'role': User.ROLE_EMPLOYEE,
                 'is_staff': False,
                 'is_superuser': False,
-                'password': 'password123',
+                'password': '123456',
                 'emp_id': 'EMP005',
                 'dept': 'Quality Assurance',
                 'designation': 'QA Automation Engineer',
                 'salary': 72000.00,
-                'phone': '+1-555-0105',
+                'phone': '+91-98200-11005',
                 'joining': date(2024, 3, 15),
             },
         ]
@@ -140,9 +140,15 @@ class Command(BaseCommand):
                     'is_superuser': u['is_superuser'],
                 }
             )
-            if u_created:
-                user_obj.set_password(u['password'])
-                user_obj.save()
+            if not u_created:
+                user_obj.email = u['email']
+                user_obj.first_name = u['first_name']
+                user_obj.last_name = u['last_name']
+                user_obj.role = u['role']
+                user_obj.is_staff = u['is_staff']
+                user_obj.is_superuser = u['is_superuser']
+            user_obj.set_password(u['password'])
+            user_obj.save()
 
             users[u['username']] = user_obj
 
@@ -158,6 +164,10 @@ class Command(BaseCommand):
                     'employment_status': Employee.STATUS_ACTIVE,
                 }
             )
+            if not e_created and emp_obj.user != user_obj:
+                emp_obj.user = user_obj
+                emp_obj.save()
+
             employees[u['username']] = emp_obj
             self.stdout.write(f"  [User & Employee] {u['username']} ({u['role']}) -> {emp_obj.employee_id}")
 
@@ -166,25 +176,25 @@ class Command(BaseCommand):
             name='Enterprise Workforce Portal',
             defaults={
                 'description': 'Full-stack employee management, attendance tracking, and task delegation platform.',
-                'project_manager': employees['pm_alex'],
+                'project_manager': employees['pm_mahajan'],
                 'start_date': date(2025, 1, 1),
                 'deadline': date(2025, 6, 30),
                 'status': Project.STATUS_IN_PROGRESS,
             }
         )
-        p1.team_members.set([employees['dev_john'], employees['qa_priya']])
+        p1.team_members.set([employees['sanket_wani'], employees['qa_priya']])
 
         p2, _ = Project.objects.get_or_create(
             name='Mobile Self-Service Check-In',
             defaults={
                 'description': 'Cross-platform mobile application for geolocation-based daily attendance.',
-                'project_manager': employees['pm_alex'],
+                'project_manager': employees['pm_mahajan'],
                 'start_date': date(2025, 4, 1),
                 'deadline': date(2025, 10, 15),
                 'status': Project.STATUS_PLANNED,
             }
         )
-        p2.team_members.set([employees['dev_john']])
+        p2.team_members.set([employees['sanket_wani']])
         self.stdout.write("  [Projects] Created projects with manager and team assignments.")
 
         # 4. Seed Tasks
@@ -192,7 +202,7 @@ class Command(BaseCommand):
             {
                 'title': 'Design RESTful API Endpoints',
                 'project': p1,
-                'assigned_to': employees['dev_john'],
+                'assigned_to': employees['sanket_wani'],
                 'priority': Task.PRIORITY_HIGH,
                 'status': Task.STATUS_COMPLETED,
                 'deadline': date(2025, 2, 20),
@@ -200,7 +210,7 @@ class Command(BaseCommand):
             {
                 'title': 'Implement Role-Based Authorization Views',
                 'project': p1,
-                'assigned_to': employees['dev_john'],
+                'assigned_to': employees['sanket_wani'],
                 'priority': Task.PRIORITY_HIGH,
                 'status': Task.STATUS_IN_PROGRESS,
                 'deadline': date(2025, 3, 10),
@@ -216,7 +226,7 @@ class Command(BaseCommand):
             {
                 'title': 'Mobile Wireframe UX Review',
                 'project': p2,
-                'assigned_to': employees['dev_john'],
+                'assigned_to': employees['sanket_wani'],
                 'priority': Task.PRIORITY_LOW,
                 'status': Task.STATUS_TODO,
                 'deadline': date(2025, 4, 30),
@@ -243,12 +253,12 @@ class Command(BaseCommand):
 
         attendance_records = [
             # Yesterday
-            {'employee': employees['dev_john'], 'date': yesterday, 'check_in': time(9, 2), 'check_out': time(17, 30), 'status': Attendance.STATUS_PRESENT},
+            {'employee': employees['sanket_wani'], 'date': yesterday, 'check_in': time(9, 2), 'check_out': time(17, 30), 'status': Attendance.STATUS_PRESENT},
             {'employee': employees['qa_priya'], 'date': yesterday, 'check_in': time(9, 15), 'check_out': time(17, 45), 'status': Attendance.STATUS_PRESENT},
-            {'employee': employees['pm_alex'], 'date': yesterday, 'check_in': time(8, 55), 'check_out': time(18, 0), 'status': Attendance.STATUS_PRESENT},
+            {'employee': employees['pm_mahajan'], 'date': yesterday, 'check_in': time(8, 55), 'check_out': time(18, 0), 'status': Attendance.STATUS_PRESENT},
             # Today
-            {'employee': employees['dev_john'], 'date': today, 'check_in': time(9, 5), 'check_out': None, 'status': Attendance.STATUS_PRESENT},
-            {'employee': employees['pm_alex'], 'date': today, 'check_in': time(8, 50), 'check_out': None, 'status': Attendance.STATUS_PRESENT},
+            {'employee': employees['sanket_wani'], 'date': today, 'check_in': time(9, 5), 'check_out': None, 'status': Attendance.STATUS_PRESENT},
+            {'employee': employees['pm_mahajan'], 'date': today, 'check_in': time(8, 50), 'check_out': None, 'status': Attendance.STATUS_PRESENT},
         ]
 
         for a in attendance_records:
@@ -266,13 +276,13 @@ class Command(BaseCommand):
         # 6. Seed Leaves
         leaves_data = [
             {
-                'employee': employees['dev_john'],
+                'employee': employees['sanket_wani'],
                 'leave_type': Leave.TYPE_CASUAL,
                 'start_date': today + timedelta(days=5),
                 'end_date': today + timedelta(days=7),
                 'reason': 'Family gathering out of town',
                 'status': Leave.STATUS_APPROVED,
-                'reviewed_by': users['hr_sarah'],
+                'reviewed_by': users['hr_neha'],
                 'review_comment': 'Approved. Enjoy your time with family.',
             },
             {
@@ -303,9 +313,9 @@ class Command(BaseCommand):
         self.stdout.write("  [Leaves] Seeded leave requests with pending and approved statuses.")
 
         self.stdout.write(self.style.SUCCESS('\nSuccessfully seeded all enterprise sample data!'))
-        self.stdout.write(self.style.SUCCESS('Admin Credentials:   username: admin    | password: admin123'))
-        self.stdout.write(self.style.SUCCESS('HR Credentials:      username: hr_sarah | password: password123'))
-        self.stdout.write(self.style.SUCCESS('PM Credentials:      username: pm_alex  | password: password123'))
-        self.stdout.write(self.style.SUCCESS('Dev Credentials:     username: dev_john | password: password123'))
-        self.stdout.write(self.style.SUCCESS('QA Credentials:      username: qa_priya | password: password123'))
+        self.stdout.write(self.style.SUCCESS('Admin Credentials:   username: admin        | password: 123456 (Rajesh Sharma)'))
+        self.stdout.write(self.style.SUCCESS('HR Credentials:      username: hr_neha      | password: 123456 (Neha Sharma)'))
+        self.stdout.write(self.style.SUCCESS('PM Credentials:      username: pm_mahajan   | password: 123456 (Pratham Mahajan)'))
+        self.stdout.write(self.style.SUCCESS('Dev Credentials:     username: sanket_wani  | password: 123456 (Sanket Wani)'))
+        self.stdout.write(self.style.SUCCESS('QA Credentials:      username: qa_priya     | password: 123456 (Priya Sharma)'))
 

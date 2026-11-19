@@ -32,15 +32,15 @@ def run_tests():
 
     # 1. Verify Seeded Users Exist
     admin_user = User.objects.get(username='admin')
-    hr_user = User.objects.get(username='hr_sarah')
-    pm_user = User.objects.get(username='pm_alex')
-    dev_user = User.objects.get(username='dev_john')
+    hr_user = User.objects.get(username='hr_neha')
+    pm_user = User.objects.get(username='pm_mahajan')
+    dev_user = User.objects.get(username='sanket_wani')
     print("[OK] User accounts verified: Admin, HR, PM, and Employee.")
 
     # 2. Authentication & JWT Token Login
     login_res = client.post('/api/auth/login/', {
-        'username': 'dev_john',
-        'password': 'password123'
+        'username': 'sanket_wani',
+        'password': '123456'
     })
     assert login_res.status_code == status.HTTP_200_OK
     assert 'access' in login_res.data

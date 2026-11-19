@@ -212,18 +212,18 @@ Follow these steps during your live screen-share or interview presentation:
 ### Step 1: Login & Role Switching (30 seconds)
 1. Navigate to `http://localhost:5173/`.
 2. Point out the **One-Click Demo Switcher** at the top of the card.
-3. Click **"Admin"** (`admin / admin123`) and log in.
+3. Click **"Admin"** (`admin / 123456`) and log in.
 4. *Talking Point*: *"Notice the instant JWT acquisition and localStorage synchronization handled via custom React context and Axios interceptors."*
 
 ### Step 2: Role-Polymorphic Dashboard (60 seconds)
 1. Show the Admin dashboard with system-wide employee, project, task, and attendance cards.
 2. Note the Department Distribution table and Leave Requests.
-3. Log out, then click **"Developer"** (`dev_john`).
-4. Notice how the dashboard dynamically morphs: John sees personal task velocity, upcoming deadlines, his attendance card, and personal leave summary.
+3. Log out, then click **"Developer"** (`sanket_wani`).
+4. Notice how the dashboard dynamically morphs: Sanket sees personal task velocity, upcoming deadlines, his attendance card, and personal leave summary.
 5. *Talking Point*: *"This is backed by a single polymorphic endpoint `/api/dashboard/stats/` that inspects user claims and selectively queries relevant ORM models."*
 
 ### Step 3: Shift Punch-Clock (45 seconds)
-1. While logged in as `dev_john`, click the topbar **"Check In Today"** button.
+1. While logged in as `sanket_wani`, click the topbar **"Check In Today"** button.
 2. Show the button transition to **"Check Out (In: HH:MM:SS)"**.
 3. *Talking Point*: *"The backend enforces a `UniqueConstraint` on `[employee, date]`. Duplicate punch attempts on the same date are rejected at the database engine level."*
 
@@ -235,10 +235,10 @@ Follow these steps during your live screen-share or interview presentation:
 5. *Talking Point*: *"Employees are restricted to updating the status of tasks assigned to them; only PMs, HR, or Admins have permission to reassign or delete tasks."*
 
 ### Step 5: Leave Application & HR Review Workflow (60 seconds)
-1. As `dev_john`, navigate to **Leaves** and click **"Apply for Leave"**.
+1. As `sanket_wani`, navigate to **Leaves** and click **"Apply for Leave"**.
 2. Submit a request for 3 days of Casual Leave.
 3. Show the request appear with status `PENDING`.
-4. Log out and switch to **"HR Manager"** (`hr_sarah`).
+4. Log out and switch to **"HR Manager"** (`hr_neha`).
 5. Open **Leaves** → **Pending Approval** queue (notice the badge count).
 6. Click **"Review"**, select **"Approve Leave"**, add remarks, and confirm.
 7. *Talking Point*: *"The Leave model includes custom validation preventing overlapping date ranges and ensuring start date precedes end date."*

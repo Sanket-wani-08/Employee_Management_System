@@ -140,13 +140,13 @@ python test_models.py    # Database model constraints & Foreign Key protections
 
 The login screen features an **Interview Demo Switcher** with one-click credential auto-fill:
 
-| Role | Username | Password | Access Capabilities |
-| :--- | :--- | :--- | :--- |
-| **Admin** | `admin` | `admin123` | Full access across all modules, user creation, CSV exports, department CRUD. |
-| **HR Manager** | `hr_sarah` | `password123` | Workforce CRUD, salary access, manual attendance logging, leave approval queue. |
-| **Project Manager** | `pm_alex` | `password123` | Project CRUD, team assignment, task assignment, progress analytics. |
-| **Employee (Dev)** | `dev_john` | `password123` | Self-service check-in/out, my tasks workflow status updates, apply for leave. |
-| **Employee (QA)** | `qa_priya` | `password123` | Self-service check-in/out, view project tasks, apply for leave. |
+| Role | Name | Username | Password | Access Capabilities |
+| :--- | :--- | :--- | :--- | :--- |
+| **Admin** | Rajesh Sharma | `admin` | `123456` | Full access across all modules, user creation, CSV exports, department CRUD. |
+| **HR Manager** | Neha Sharma | `hr_neha` | `123456` | Workforce CRUD, salary access, manual attendance logging, leave approval queue. |
+| **Project Manager** | Pratham Mahajan | `pm_mahajan` | `123456` | Project CRUD, team assignment, task assignment, progress analytics. |
+| **Employee (Dev)** | Sanket Wani | `sanket_wani` | `123456` | Self-service check-in/out, my tasks workflow status updates, apply for leave. |
+| **Employee (QA)** | Priya Sharma | `qa_priya` | `123456` | Self-service check-in/out, view project tasks, apply for leave. |
 
 ---
 

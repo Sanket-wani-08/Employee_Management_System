@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 
 const Login = () => {
   const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin123');
+  const [password, setPassword] = useState('123456');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -128,43 +128,43 @@ const Login = () => {
       {/* Quick Demo Switcher - Perfect for Interview Demonstration */}
       <div className="mt-4 pt-3 border-top">
         <label className="d-block small text-muted text-center mb-2 fw-semibold">
-          <i className="bi bi-lightning-charge-fill text-warning me-1"></i>One-Click Interview Demo Accounts:
+          <i className="bi bi-lightning-charge-fill text-warning me-1"></i>One-Click Interview Demo Accounts (Password: 123456):
         </label>
         <div className="row g-2">
           <div className="col-6">
             <button
               type="button"
               className={`btn btn-sm w-100 py-1 ${username === 'admin' ? 'btn-danger' : 'btn-outline-danger'}`}
-              onClick={() => handleDemoSelect('admin', 'admin123')}
+              onClick={() => handleDemoSelect('admin', '123456')}
             >
-              <i className="bi bi-shield-fill me-1"></i>Admin
+              <i className="bi bi-shield-fill me-1"></i>Admin (Rajesh)
             </button>
           </div>
           <div className="col-6">
             <button
               type="button"
-              className={`btn btn-sm w-100 py-1 ${username === 'hr_sarah' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleDemoSelect('hr_sarah', 'password123')}
+              className={`btn btn-sm w-100 py-1 ${username === 'hr_neha' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => handleDemoSelect('hr_neha', '123456')}
             >
-              <i className="bi bi-person-badge-fill me-1"></i>HR Lead
+              <i className="bi bi-person-badge-fill me-1"></i>HR Lead (Neha)
             </button>
           </div>
           <div className="col-6">
             <button
               type="button"
-              className={`btn btn-sm w-100 py-1 ${username === 'pm_alex' ? 'btn-warning text-dark' : 'btn-outline-warning text-dark'}`}
-              onClick={() => handleDemoSelect('pm_alex', 'password123')}
+              className={`btn btn-sm w-100 py-1 ${username === 'pm_mahajan' ? 'btn-warning text-dark' : 'btn-outline-warning text-dark'}`}
+              onClick={() => handleDemoSelect('pm_mahajan', '123456')}
             >
-              <i className="bi bi-kanban me-1"></i>Project Mgr
+              <i className="bi bi-kanban me-1"></i>PM (Pratham)
             </button>
           </div>
           <div className="col-6">
             <button
               type="button"
-              className={`btn btn-sm w-100 py-1 ${username === 'dev_john' ? 'btn-success' : 'btn-outline-success'}`}
-              onClick={() => handleDemoSelect('dev_john', 'password123')}
+              className={`btn btn-sm w-100 py-1 ${username === 'sanket_wani' ? 'btn-success' : 'btn-outline-success'}`}
+              onClick={() => handleDemoSelect('sanket_wani', '123456')}
             >
-              <i className="bi bi-code-slash me-1"></i>Developer
+              <i className="bi bi-code-slash me-1"></i>Dev (Sanket)
             </button>
           </div>
         </div>
